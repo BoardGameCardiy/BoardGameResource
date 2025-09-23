@@ -1,0 +1,56 @@
+version: 0.1
+name: brains
+jobs:
+  - input: card.jpg
+    name: cut
+    steps:
+      - action: min
+      - action: cut
+        args:
+          row: 7
+          col: 10
+          limit: 7
+      - action: save
+        args:
+          prefix: card-
+          output: card/ 
+  - input: youtube-tile-ps-output.png
+    name: ps
+    steps:
+      - action: cut
+        args:
+          row: 3
+          col: 3
+          limit: 7
+      - action: save
+        args:
+          prefix: ""
+          output: youtube-card/ 
+
+  - input: youtube-card-upscale/
+    # input: card-upscale-ps
+    name: card
+    steps:
+      - action: sheet
+        args:
+          row: 2
+          column: 5
+          height: 35
+          width: 35
+      - action: save
+        args:
+          prefix: ps-card-
+          output: sheet/ 
+
+  - input: map/
+    ext: .jpg
+    name: map
+    steps:
+      - action: sheet_2
+        args:
+          width: 98
+          height: 137
+      - action: save
+        args:
+          prefix: map-
+          output: sheet/ 

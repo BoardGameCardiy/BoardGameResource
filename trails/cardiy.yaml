@@ -1,0 +1,114 @@
+version: 0.1
+name: sample
+args:
+        height: 72
+        width: 48
+jobs:
+ 
+  - input: 18.png
+    name: token
+    output: pnp/token-*
+    steps: 
+      - action: add
+        files :
+          - 19.png
+          - 20.png
+          - 21.png
+          - 22.png
+          - 23.png
+          - 25.png
+          - 24.png
+      - min
+      - background
+      - action: sheet
+        width: 21
+        height: 21
+
+  - input: badge/badge-08.png
+    name: fix
+    output: pnp/fix-*
+    steps:
+      - action: sheet
+
+  - input: 3.png
+    name: fix
+    output: pnp/fix-back-*
+    steps:
+      - action: sheet
+        flip: true
+
+  - input: night/
+    name: day
+    output: pnp/night-*
+    steps:
+      - sort
+      - action: sheet
+        width: 60
+        height: 120
+        flip: true
+      # - move-1
+      
+  - input: day/
+    name: day
+    output: pnp/day-*
+    steps:
+      - sort
+      - action: sheet
+        width: 60
+        height: 120
+  
+  - input: photo/
+    name: card
+    output: pnp/photo-*
+    steps:
+      - rotate-90
+      - action: sheet
+        row: 4
+        column: 4
+
+
+  - input: badge/
+    name: card
+    output: pnp/badge-*
+    steps:
+      - action: sheet
+        row: 4
+        column: 4
+
+  - input: 9.png
+    name: back
+    output: pnp/back1-*
+    steps:
+      - dup-32
+      - rotate-270
+      - action: sheet
+        flip: true
+      - move-1
+  
+  - input: 3.png
+    name: back
+    output: pnp/back2-*
+    steps:
+      - dup-42 
+      - action: sheet
+        flip: true
+      # - move-1
+      
+  - input: 2.png
+    name: badge
+    output: badge/*
+    steps:
+      - action: cut 
+        args:
+          row: 5
+          column: 9
+          limit : 42
+  - input: 8.png
+    name: photo
+    output: photo/*
+    steps:
+      - action: cut 
+        args:
+          row: 5
+          column: 7
+          limit : 32

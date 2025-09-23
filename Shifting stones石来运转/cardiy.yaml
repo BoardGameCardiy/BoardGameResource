@@ -1,0 +1,58 @@
+version: 0.1
+name: shifting stones
+template:
+  - name: ""
+    steps: []
+jobs:
+  - name: guide
+    input: guide-upscale/*.png
+    output: pnp/guide-*
+    steps:
+      - action: min
+      - action: sheet
+        width: 63
+        height: 87
+        page: a4
+
+  - name: card
+    input: card-upscale/*.jpg
+    output: pnp/card-*
+    steps:
+      - action: background
+      - action: sheet
+        width: 40
+        height: 53.5
+        page: a4-90
+        line_color: black
+        line_width: 1
+        flip: true
+
+  - name: back
+    input: ref/dorso.webp
+    output: pnp/back-*
+    steps:
+      - action: background
+      - expand-4-4
+      - dup-21
+      - action: sheet
+        width: 40
+        height: 53.5
+        page: a4-90
+        line_color: black
+        handlers: ["flip-y"]
+
+
+  - name: stone
+    input: stone-upscale/*.png
+    output: pnp/stone-*
+    steps:
+      - action: csv
+        csv: stone.csv
+      - action: background
+      - action: sheet
+        width: 63
+        height: 63
+        page: a4
+        line_color: white
+        flip: true
+  

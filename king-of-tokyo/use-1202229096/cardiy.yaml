@@ -1,0 +1,13 @@
+
+version: 0.1
+name: name
+jobs:
+  - input: 
+    output: 
+    name: 
+    steps:
+      - action: sheet
+        width: 56
+        height: 87
+        flip: true
+        line_color: black

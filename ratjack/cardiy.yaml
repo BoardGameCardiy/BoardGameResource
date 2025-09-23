@@ -1,0 +1,86 @@
+
+version: 0.1
+name: kot-duel
+args:
+    width : 63
+    height: 88
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          flip: true
+          # align: top
+  
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # align: top
+
+jobs:
+  - name: sheet-card
+    input: card/output/filled/*.fill.jpg 
+    output: sheet/card-zh-*
+    steps:
+      - template: sheet
+
+  - name: card
+    input: card/
+    output: sheet/card*
+    steps:
+      - template: sheet
+
+  - name: cut-card
+    input: card.upscale.jpg
+    output: card/*
+    steps:
+      - cut-5-12
+
+  - name: back
+    input: back.png
+    output: sheet/back-*
+    steps:
+      - dup-9
+      - template: sheet
+        args:
+          line_width: 1
+
+  - name: back
+    input: back.png
+    output: sheet/back-last-*
+    steps:
+      - dup-2
+      - template: sheet-back
+        args:
+          line_width: 1
+
+
+  - name: card
+    input: pnp/card/*.png
+    output: sheet/card-*
+    steps:
+      - template: sheet
+
+  - name: cut-token
+    input: token.webp
+    output: pnp/token/*
+    steps:
+        - cut-1-16
+  
+  - name: token
+    input:  pnp/token-upscale
+    output: sheet/token-*
+    steps:
+        - background
+        - action: sheet
+          args:
+            width: 25
+            height: 25
+            margin: 2
+            align: top
+            
+  

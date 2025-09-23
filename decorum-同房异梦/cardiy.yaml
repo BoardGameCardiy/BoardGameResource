@@ -1,0 +1,103 @@
+version: 0.1
+name: decorum
+jobs:
+  - input: 1370-330/
+    name: color
+    steps:
+      - action: dup
+        args:
+          dup: 4
+      - action: rotate
+        args:
+          rotate: 90
+      - action: sheet
+        args:
+          height: 100
+          width: 24
+          dpi: 300
+          column: 8
+          row: 2
+      - action: save
+        args:
+          prefix: color-
+          output: sheet/ 
+  - input: tts/token-mate
+    name: mate
+    steps:
+      - action: sheet
+        args:
+          height: 30
+          dpi: 300
+          column: 5
+          row: 6
+      - action: save
+        args:
+          prefix: mate-
+          output: sheet/ 
+  - input: tts/token-gift
+    name: gift
+    steps:
+      - action: sheet
+        args:
+          height: 30
+          width: 30
+          dpi: 300
+          column: 5
+          row: 6
+      - action: save
+        args:
+          prefix: gift-
+          output: sheet/ 
+  - input: 620-940/
+    name: a
+    steps:
+      - action: add
+        args:
+          dirs: 
+            - 680-960/
+            - 600-950/
+
+      - action: sheet
+        args:
+          height: 40
+          dpi: 300
+          column: 6
+          row: 6
+      - action: save
+        args:
+          prefix: a-
+          output: sheet/ 
+  - input: 2-player-card
+    name: card-2
+    page: a4-90
+    steps:
+      - action: sheet_2
+        args:
+          width: 88
+          height: 63
+          dpi: 300
+      # - action: sheet
+      #   args:
+      #     width: 70
+      #     height: 100
+      #     column: 4
+      #     row: 2
+      #     dpi: 300
+      - action: save
+        args:
+          prefix: card-2-
+          output: sheet/ 
+  - input: tts/token-pet
+    name: pet
+    steps:
+      - action: sheet
+        args:
+          height: 30
+          width: 30
+          dpi: 300
+          column: 6
+          row: 6
+      - action: save
+        args:
+          prefix: pet-
+          output: sheet/         

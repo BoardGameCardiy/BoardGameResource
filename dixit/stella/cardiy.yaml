@@ -1,0 +1,56 @@
+
+version: "0.1"
+name: kot-duel
+args:
+    width : 80
+    height: 120
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          flip: true
+          # align: top
+
+
+  - name: sheet-small
+    steps:
+      - action: sheet
+        args:
+          page: a4-90
+          width : 40
+          height: 0
+          column: 7
+          row: 3
+          # width : 63
+          # height: 88
+
+jobs:
+  - name: sheet
+    input: card/*.png
+    output: sheet/*
+    steps:
+      - template: sheet-small
+
+  - name: back
+    input: back.jpg
+    output: sheet/back-*
+    steps:
+      - dup-21
+      - template: sheet-small
+
+  - name: cut-1
+    input: 1.png
+    output: card/page-1-*
+    steps:
+      - cut-7-10-69
+
+  - name: cut-2
+    input: 2.png
+    output: card/page-2-*
+    steps:
+      - cut-7-10-15
+  
+  

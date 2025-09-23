@@ -1,0 +1,97 @@
+
+version: 0.1
+name: unknown
+template:
+  - name: ""
+    steps: []
+args:
+    width: 63
+    height: 88
+jobs:
+  - name: theme
+    input: theme1-upscale/
+    output: pnp/t1-*
+    steps:
+      - action: sheet
+        page: a4
+
+  - name: theme
+    input: theme2-upscale/
+    output: pnp/t2-*
+    steps:
+      - action: sheet
+        page: a4
+        handlers: ['flip-x']
+
+  - name: card
+    input: tts2/simplify-upscale/
+    output: pnp/card-*
+    steps:
+      - round-4
+      - expand-6-6
+      - action: sheet
+        page: a4
+        line_color: black
+        line_width: 1
+
+  - name: a
+    output: pnp/a-*
+    steps:
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Aux 1/**/A.png'
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Main 1/**/A.png'
+      - part:
+          steps:
+            - action: file
+              file: control-upscale/ControlBack.png
+            - dup-3
+      - action: sheet
+        page: a4
+
+  - name: b
+    output: pnp/b-*
+    steps:
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Aux 1/**/B.png'
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Main 1/**/B.png'
+      - rotate-180
+      - part:
+          steps:
+            - action: file
+              file: control-upscale/ControlFront.png
+            - dup-3
+      - action: sheet
+        page: a4
+        handlers: ['flip-x']
+
+  - name: back
+    output: pnp/back-*
+    steps:
+      - action: file
+        file: back.upscale.jpg
+      - round-4
+      - action: expand
+        width_expand: 6
+        height_expand: 6
+      - dup-9
+      - action: sheet
+        page: a4
+
+  - name: high
+    output: pnp/high-*
+    steps:
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Aux 1/**/CommandSheet.png'
+      - action: glob
+        glob: 'TabletopSimulator_Compile/Assets/Cards/Protocols/Official/Main 1/**/CommandSheet.png'
+      - cut-2-3
+      # - round-4
+      # - expand-6-6
+      - action: sheet
+        page: a4
+        line_color: black
+        line_width: 1
+
+  

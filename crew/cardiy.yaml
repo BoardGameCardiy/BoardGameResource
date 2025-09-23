@@ -1,0 +1,13 @@
+version: 0.1
+name: crew
+jobs:
+  - input: front.png
+    name: front
+    output: number/
+    steps:
+      - action: cut 
+        args:
+          row: 7
+          column: 10
+          limit: 40
+    

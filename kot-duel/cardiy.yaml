@@ -1,0 +1,232 @@
+
+version: 0.1
+name: kot-duel
+args:
+    width : 63
+    height: 88
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          flip: true
+          # align: top
+  
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # align: top
+
+jobs:
+  
+
+  - name: role
+    input: pnp/role-1/*.png
+    output: sheet/role-1-*
+    steps:
+      - template: sheet
+        args:
+            height: 71
+            width: 90
+
+  - name: role
+    input: pnp/role-2/*.png
+    output: sheet/role-2-*
+    steps:
+      - template: sheet-back
+        args:
+          height: 71
+          width: 90
+
+  - name: back
+    input: back.jpg
+    output: sheet/back-*
+    steps:
+      - dup-9
+      - template: sheet
+
+  - name: back
+    input: back.jpg
+    output: sheet/back-last-*
+    steps:
+      - dup-5
+      - template: sheet-back
+
+  - name: card
+    input: pnp/card/*.png
+    output: sheet/card-*
+    steps:
+      - template: sheet
+
+  - name: cut-card
+    input: card.jpg
+    output: pnp/card/*
+    steps:
+        - cut-5-10
+  - name: cut
+    input: role-1.jpg
+    output: pnp/role-1/*
+    steps:
+        - cut-3-2
+
+  - name: cut
+    input: role-2.jpg
+    output: pnp/role-2/*
+    steps:
+        - cut-3-2
+
+
+  - name: power
+    output: sheet/power-*
+    steps:
+        - action: dir
+          dir: pnp/power-1/*
+        - background
+        - template: sheet
+          width: 44
+          height: 34
+  - name: power
+    output: sheet/power-back-*
+    steps:
+        - action: dir
+          dir: pnp/power-2/*
+        - background
+        - template: sheet-back
+          width: 44
+          height: 34
+
+  - name: tile
+    input: pnp/tile/*.png
+    output: sheet/tile-*
+    steps:
+      - part:
+          steps:
+            - action: file
+              file: pnp/tile/11.png
+            - dup-8
+
+      - template: sheet
+        width: 15
+        height: 19
+        force: true
+
+  - name: card-1
+    input: pnp/card-upscale/1-*.jpg
+    output: sheet/card-1-*
+    steps:
+      - action: dir
+        dir: pnp/battle-upscale/
+      - template: sheet
+    
+  - name: card-2
+    input: pnp/card-upscale/2-*.jpg
+    output: sheet/card-2-*
+    steps:
+      - template: sheet
+        width : 44
+        height: 68
+
+  - name: card-back-1
+    output: sheet/back-card-1-*
+    steps:
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-1.jpg
+            - dup-21
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-battle-1.jpg
+            - dup-3
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-battle-2.jpg
+            - dup-3
+      - template: sheet-back
+
+  - name: card-back-2
+    output: sheet/back-card-2-*
+    steps:
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-2.jpg
+            - dup-20
+      - template: sheet-back
+        width : 44
+        height: 68
+
+
+  - name: battle
+    input: pnp/battle-upscale/*.jpg
+    output: sheet/battle-*
+    steps:
+      - template: sheet
+
+  - name: battle
+    output: sheet/battle-back-*
+    steps:
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-battle-1.jpg
+            - dup-3
+      - part:
+          steps:
+            - action: file
+              file: pnp/back-upscale/back-battle-2.jpg
+            - dup-3
+      - template: sheet-back
+
+
+  - name: tile
+    input: tile/*.png
+    output: pnp/tile/*
+    steps:
+      - action: cut
+        row: 4
+        column: 4
+        pick: [11]
+        width: 0
+        height: 0
+        
+  - name: battle-1
+    input: battle-1.jpg
+    output: pnp/battle/1-*
+    steps:
+      - min_black
+      - action: cut
+        row: 1
+        column: 3
+  - name: battle-2
+    input: battle-2.jpg
+    output: pnp/battle/2-*
+    steps:
+      - min_black
+      - action: cut
+        row: 1
+        column: 3
+  - name: 1
+    input: 1.jpg
+    output: pnp/1-*
+    steps:
+      - min_black
+      - action: cut
+        row: 3
+        column: 10
+        limit: 21
+  
+  - name: 2
+    input: 2.jpg
+    output: pnp/2-*
+    steps:
+      - min_black
+      - action: cut
+        row: 2
+        column: 10

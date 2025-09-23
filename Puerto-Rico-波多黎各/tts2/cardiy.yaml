@@ -1,0 +1,112 @@
+version: 0.1
+name: puerto-rico
+jobs:
+  - input: ../token-final/back.png
+    name: token
+    output: pnp/token-back-*
+    steps:
+      - dup-60
+      - action: sheet
+        args:
+          width: 30
+          height: 26
+          row: 12
+          column: 6
+          line_width: 0
+          line_color: black
+          hexagon: true
+          flip: true
+          page: a4
+
+  - input: ../token-final/
+    name: token
+    output: pnp/token-*
+    steps: 
+      - action: csv 
+        args:
+          csv: ../pnp-token.csv
+
+      - action: sheet
+        args:
+          width: 30
+          height: 26
+          row: 12
+          column: 6
+          line_width: 0
+          line_color: black
+          hexagon: true
+          page: a4
+
+  - input: ./product-deluxe/center-upscale/yellow.ps.png
+    name: fix
+    output: pnp/fix-*
+    steps:
+      - dup-10
+      
+      - action: sheet
+        args:
+          width: 30
+          height: 30
+          page: a4-90
+          
+  - input: ./product-deluxe/center-upscale
+    name: plant
+    output: pnp/plant-*
+    steps:
+      - action: csv 
+        args:
+          csv: pnp-product.csv
+      
+      - action: sheet
+        args:
+          width: 30
+          height: 30
+          page: a4-90
+
+
+  - input: ship/
+    name: misc
+    output: pnp/misc-*
+    steps:
+      
+      - action: add
+        args:
+          files:
+            - house.upscale.ps.png
+            - 046.jpg
+      
+      - min
+      - background
+      - action: sheet
+        args:
+          width: 63
+          height: 88
+          page: a4
+          line_color: black
+
+  - input: building-1/output/small
+    name: building
+    output: pnp/building-*
+    steps:
+      - action: csv 
+        args:
+          csv: pnp-building.csv
+      
+      - action: sheet
+        args:
+          width: 52
+          height: 30
+          page: a4-90
+
+  - input: wip/puerto/tts2/building-1/output/large
+    name: p2
+    output: pnp/building-large-*
+    steps:
+      - action: csv 
+        args:
+          csv: pnp-building.csv
+      
+      - action: sheet
+        args:
+          width: 52
+          height: 63

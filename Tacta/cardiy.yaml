@@ -1,0 +1,33 @@
+
+version: 0.1
+name: tacta
+template:
+  - name: ""
+    steps: []
+args:
+  width: 63
+  height: 88
+jobs:
+  - name: blue-red
+    output: pnp/blue-red-*
+    steps:
+      - action: glob
+        glob: tts/A/*Blue*.png
+      - action: glob
+        glob: tts/A/*Red*.png
+      - action: sheet
+        page: a4
+
+  - name: blue-red-back
+    output: pnp/back-blue-red-*
+    steps:
+      - action: glob
+        glob: tts/B/*Blue*.png
+      - action: glob
+        glob: tts/B/*Red*.png
+      - action: sheet
+        handlers: ["flip-x"]
+        page: a4
+        line_width: 1
+        line_type: dashed
+

@@ -1,0 +1,105 @@
+
+version: 0.1
+name: king
+args:
+  width: 63
+  height: 88
+jobs:
+  - input: cultist-tile.png.upscale.jpg.png
+    name: cultist
+    output: pnp/cultist-*
+    steps:
+      - dup-14
+      - action: sheet
+        width: 27
+        height: 27
+        # page_alias: top
+
+  - input: use-1202229096/dlc-token/part1-upscale/
+    name: dlc-token
+    output: pnp/dlc-token-*
+    steps:
+      - action: sheet
+        width: 27
+        height: 27
+        
+
+  - input: dlc-2023-upscale
+    name: dlc-2023
+    output: pnp/dlc-2023-*
+    steps:
+      - rotate-90
+      - action: sheet
+        width: 54
+        height: 88
+
+
+  - input: use-1202229096/dlc-2-card
+    name: dlc-2023-cut
+    output: dlc-2023/
+    steps:
+      - action: cut
+        row: 2
+        column: 5
+
+  - input: use-1202229096/token-upscale
+    name : token
+    output : pnp/token-*
+    steps:
+      - action: csv
+        csv: use-1202229096/token-upscale/count.csv
+      - action: sheet
+        width: 26
+        height: 26
+        each_row: 5
+
+
+  - input: use-1202229096/stand-min-upscale/*.min.jpg
+    name: stand
+    output: pnp/stand-*
+    steps:  
+      - action: min
+      - action: sheet
+        width: 63
+        height: 88
+        line_color: black
+
+  - input: card-upscale/
+    name: card
+    output: pnp/card-*
+    steps:
+      - action: sheet
+        width: 63
+        height: 88
+
+  - input: use-1202229096/5.ps.jpg
+    output: pnp/back
+    name: back
+    steps:
+      - dup-9
+      - action: sheet
+      - move-0.1
+
+  - input: use-1202229096/5.ps.jpg
+    output: pnp/back1
+    name: back1
+    steps:
+      - action: sheet
+        flip: true
+      - move-0.1
+
+  - input: use-1202229096/4.png
+    output: card/1-*
+    name: cut
+    steps:
+      - action: cut
+        row: 4
+        column: 8
+  - input: use-1202229096/6.png
+    output: card/2-*
+    name: cut
+    steps:
+      - action: cut
+        row: 4
+        column: 8
+

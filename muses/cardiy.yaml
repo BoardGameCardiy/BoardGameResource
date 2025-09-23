@@ -1,0 +1,22 @@
+version: 0.1
+name: muses
+jobs:
+  - input: back.png
+    name: back
+    output: sheet/back-*
+    steps:
+      - dup-9
+      - action: sheet
+        args:
+          height: 63
+          width: 63
+          flip: true
+
+  - input: front/
+    name: front
+    output: sheet/front-*
+    steps:
+      - action: sheet
+        args:
+          height: 63
+          width: 63

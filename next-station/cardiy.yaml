@@ -1,0 +1,62 @@
+version: 0.1
+name: next-station
+jobs:
+  - input: stationcards.jpg
+    name: london-card
+    steps:
+      - action: cut 
+        args:
+          row: 3
+          col: 4
+      - action: save
+        args:
+          output: london/card/
+  - input: objectives.jpg
+    name: london-obj
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          col: 5
+      - action: save
+        args:
+          output: london/obj/
+  - input: powers.jpg
+    name: london-power
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          col: 4
+      - action: save
+        args:
+          output: london/power/
+
+  - input: london/card-upscale
+    name: sheet-card
+    output: london/sheet/card-*
+    steps:
+      - action: rotate
+        args:
+          rotate: -90
+      - action: sheet_8 
+        args:
+          back: london/back-upscale.png
+          height: 57
+          width: 88
+  - input: london/obj-upscale
+    name: sheet-mini
+    output: london/sheet/mini-*
+    steps:
+      - action: add
+        args:
+          dirs:
+            - london/power-upscale
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          height: 88
+          width: 63
+    
+  

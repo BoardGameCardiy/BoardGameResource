@@ -1,0 +1,17 @@
+version: 0.1
+name: captain
+args:
+  width: 63
+  height: 88
+
+jobs:
+  - name: map
+    output: pnp/map
+    steps:
+      - action: add
+        files:
+          - /Users/yz/Documents/BoardGame/TTS/CaptainFlip/官方可供下载资源/GameElements/Map.png
+      - background
+      - action: sheet
+        
+        

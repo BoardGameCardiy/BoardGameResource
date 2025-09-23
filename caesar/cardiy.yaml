@@ -1,0 +1,91 @@
+version: 0.1
+name: caesar
+template:
+  - name: ""
+    steps: []
+jobs:
+  - name: solo
+    input: solo-upscale/
+    output: pnp/solo-*
+    steps:
+      - action: sheet
+        width: 56
+        height: 87
+        page: a4-90
+        line_color: white
+  
+  - name: solo
+    input: solo-back.png.upscale.jpg.png
+    output: pnp/solo-back-*
+    steps:
+      - rotate-180
+      - dup-10
+      - action: sheet
+        width: 56
+        height: 87
+        page: a4-90
+        line_color: white
+        flip: true
+  
+
+  - name: fix-token
+    output: pnp/fix-token-*
+    steps:
+    
+      - action: files
+        files: 
+          - token/blue.png
+          - token/red.png
+      
+      - action: background
+      - dup-12
+
+      - action: files
+        files:
+          - token/red-back.png
+          - token/blue-back.png
+        dup: 2
+      - action: background
+        
+      - action: sheet
+        width: 26
+        height: 26
+        margin: 1
+        line_color: "white"
+
+  - name: token
+    output: pnp/token-*
+    steps:
+      - action: dirs
+        dirs:
+          - token/blue/*.png
+          - token/red/*.png
+
+      - action: dirs
+        dirs:
+          - token/yellow/*.png
+        dup: 6
+
+
+      - action: file
+        file: token/blue.png
+        dup: 12
+      
+      - action: file
+        file: token/red.png
+        dup: 12
+
+      - action: files
+        files:
+          - token/red-back.png
+          - token/blue-back.png
+        dup: 19
+
+      - action: background
+        
+      - action: sheet
+        width: 26
+        height: 26
+        margin: 1
+
+

@@ -1,0 +1,65 @@
+version: 0.1
+name: guild
+jobs:
+  - input: token-front.png
+    name: token-1
+    steps:
+      - action: cut
+        args:
+          row: 1
+          col: 3
+      - action: save
+        args:
+          output: token
+    
+  - input: token/
+    name: token-2
+    steps:
+
+      - action: add
+        args: 
+          paths: 
+            - token-back.png
+            - token-back.png
+            - token-back.png
+      - action: dup
+        args:
+          dup: 2
+      - action: sheet
+        args:
+          width: 25
+          height: 25
+          row: 6
+          column: 3
+          page: a4-90
+      - action: save
+        args:
+          output: sheet
+          prefix: token
+    
+  - input: explore.png
+    ignore: true
+    steps:
+      - action: cut 
+        args:
+          row: 6
+          col: 6
+          limit : 10
+      - action: min
+      - action: background
+      - action: save
+        args:
+          output: explore
+  - input: explore
+    steps:
+      - action: sheet_8
+        args:
+          width: 88
+          height: 63
+          back: explore/01.png
+          dpi: 120
+      - action: save
+        args:
+          prefix: explore-
+          output: sheet/
+    

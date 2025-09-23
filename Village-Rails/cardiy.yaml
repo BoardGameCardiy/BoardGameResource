@@ -1,0 +1,65 @@
+version: 0.1
+name: shifting stones
+template:
+  - name: ""
+    steps: []
+args:
+  width: 63
+  height: 41
+  # 63*3
+  # 41*4
+jobs:
+  - name: card
+    input: card1/f*.png
+    output: pnp/card1-*
+    steps:
+      - cut-7-6
+      - filter_color
+      - action: sheet
+        page: a4
+
+  - name: back
+    input: card1/b*.png
+    output: pnp/card1-back-*
+    steps:
+      - cut-7-6
+      - filter_color
+      - action: sheet
+        page: a4
+        line_color: black
+        handlers: ["flip-x"]
+
+  - name: terminus
+    input: card2/terminus.png
+    output: pnp/terminus-*
+    steps:
+      - cut-4-10
+      - filter_color
+      - part:
+          steps:
+            - action: file
+              file: help0.png
+            - dup-4
+      - rotate-90
+      - action: sheet
+        page: a4
+
+  - name: terminus-back
+    input: card2/back.png
+    output: pnp/terminus-back-*
+    steps:
+      - rotate-90
+      - dup-38
+      - part:
+          steps:
+            - action: file
+              file: help1.png
+            - rotate-90
+            - dup-4
+      - action: sheet
+        page: a4
+        line_color: black
+        handlers: ["flip-x"]
+
+
+  

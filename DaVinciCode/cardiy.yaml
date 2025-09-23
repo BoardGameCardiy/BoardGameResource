@@ -1,0 +1,63 @@
+
+version: "0.1"
+name: davinci-code
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          flip: true
+          page: a4
+          row: 4
+          column: 4
+          width : 50
+          height: 70
+          # margin: 1
+          line_width: 1
+          line_color: black
+          # width : 63
+          # height: 88
+
+
+  - name: sheet-small
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          row: 4
+          column: 4
+          width : 50
+          height: 70
+          # margin: 1
+          # line_width: 1
+          # line_color: black
+          # width : 63
+          # height: 88
+
+jobs:
+  - name: sheet-f
+    input: card/A-*
+    output: sheet/front-*
+    steps:
+      - template: sheet-small
+
+  - name: sheet-back
+    input: card/back-*
+    output: sheet/back-*
+    steps:
+      - template: sheet-back
+
+  - name: cut-back
+    input: back.png
+    output: card/back-*
+    steps:
+      - cut-3-9
+
+  - name: cut-A
+    input: A.png
+    output: card/A-*
+    steps:
+      - cut-3-9
+  
+  

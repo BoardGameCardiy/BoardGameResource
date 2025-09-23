@@ -1,0 +1,19 @@
+version: 0.1
+name: sample
+jobs:
+  - input: card-1
+    name: card
+    output: pnp/card-*
+    steps:
+      - action: sheet
+        width: 63
+        height: 88
+  - input: 牌背.png
+    name: back
+    output: pnp/back-*
+    steps:
+      - dup-9
+      - action: sheet
+        width: 63
+        height: 88
+  

@@ -1,0 +1,84 @@
+
+version: 0.1
+name: AgentAvenue
+args:
+    width : 63
+    height: 88
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          align: top
+          handlers:
+            - top
+            - flip-x
+  
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+
+jobs:
+
+  - name: back
+    output: pnp/back-1-*
+    input: back1.upscale.png
+    steps:
+      - dup-9
+      - template: sheet
+      
+  - name: back
+    output: pnp/back-2-*
+    input: back2.upscale.png
+    steps:
+      - dup-9
+      - template: sheet
+      
+  - name: back
+    output: pnp/back-4-*
+    input: back2.upscale.png
+    steps:
+      - dup-8
+      - template: sheet-back
+      
+  - name: back-3
+    output: pnp/back-3-*
+    steps:
+      - part:
+          steps:
+            - action: file
+              file: back1.upscale.png
+            - dup-2
+      - part:
+          steps:
+            - action: file
+              file: back2.upscale.png
+            - dup-7
+      - template: sheet-back
+      
+  - name: card
+    output: pnp/2-*
+    steps:
+      - part:
+          steps:
+            - action: dir
+              dir: card-upscale/6/*
+            - dup-6
+      - part:
+          steps:
+            - action: dir
+              dir: card-upscale/1/*
+      - part:
+          steps:
+            - action: dir
+              dir: secret-upscale/*.jpg
+      - part:
+          steps:
+            - action: file
+              file: board.upscale.png
+
+      - template: sheet

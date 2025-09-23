@@ -1,0 +1,31 @@
+
+version: 0.1
+name: unknown
+template:
+  - name: ""
+    steps: []
+args:
+  width: 41
+  height: 57
+jobs:
+  - name: card
+    input: bga/cards.upscale.png
+    output: pnp/card.png
+    steps:
+      - cut-12-5
+      - limit-68
+      - action: sheet
+        page: a4
+        line_color: white
+
+  - name: back
+    input: bga/cards.upscale.png
+    output: pnp/back.png
+    steps:
+      - cut-12-5
+      - index-58
+      - dup-20
+      - action: sheet
+        page: a4
+        line_color: black
+        line_width: 1

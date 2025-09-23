@@ -1,0 +1,50 @@
+
+version: "0.1"
+name: cabo
+args:
+  width : 46
+  height: 65
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          flip: true
+          page: a4
+          # margin: 1
+          line_width: 1
+          line_color: black
+          # width : 63
+          # height: 88
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # row: 3
+          # column: 3
+          # width : 50
+          # height: 70
+          # margin: 1
+          # line_width: 1
+          # line_color: black
+          # width : 63
+          # height: 88
+          
+
+jobs:
+  - name: sheet-front
+    input: ps/*
+    output: sheet/front-*
+    steps:
+      - dup-4
+      - template: sheet
+
+  - name: sheet-back
+    input: back.ps.png
+    output: sheet/back-*
+    steps:
+      - white
+      - dup-16
+      - template: sheet-back

@@ -1,0 +1,79 @@
+version: 0.1
+name: sky-team
+jobs:
+  - input: bga/skyteam-alltitude-tracks.jpeg
+    name: c1
+    output: c1/
+    steps:
+      - action: cut
+        args:
+          row: 1
+          col: 2
+  - input: bga/power-card-align-left.clean.png
+    name: power
+    output: power/
+    steps:
+      - action: cut
+        args:
+          row: 2
+          col: 3
+      - action: min
+  - input: bga/skyteam-approach-tracks.jpg
+    name: c2
+    output: c2/
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          col: 21
+  - input: tts/card
+    name: sheet-tts
+    output: sheet/tts/tts-*
+    steps: 
+      - action: sheet
+        args:
+          row: 1
+          column: 6
+          width: 45
+          page: a4-90
+  - input: tts/card-long
+    name: sheet-tts
+    output: sheet/tts/tts-long-*
+    steps: 
+      - action: sheet
+        args:
+          row: 1
+          column: 4
+          width: 45
+          page: a4
+          w: 500
+          h: 2330
+  - input: c1-upscale
+    name: sheet-tiktok
+    output: sheet/tiktok
+    steps: 
+      - action: sheet
+        args:
+          row: 1
+          column: 4
+          width: 45
+  - input: c2-upscale
+    name: sheet-track
+    output: sheet/track-*
+    steps: 
+      - action: sheet
+        args:
+          row: 1
+          column: 4
+          width: 45
+  - input: power
+    name: sheet-power
+    output: sheet/power-*
+    steps: 
+      - action: sheet
+        args:
+          row: 2
+          column: 3
+          width: 88
+          height: 63
+          page: a4-90

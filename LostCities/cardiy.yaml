@@ -1,0 +1,54 @@
+
+version: "0.1"
+name: lost cities
+args:
+  width : 42
+  height: 67
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          flip: true
+          page: a4
+          # margin: 1
+          line_width: 1
+          line_color: black
+          # width : 63
+          # height: 88
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # row: 3
+          # column: 3
+          # width : 50
+          # height: 70
+          # margin: 1
+          # line_width: 1
+          # line_color: black
+          # width : 63
+          # height: 88
+          
+
+jobs:
+  - name: sheet-front
+    input: card2/*.jpg
+    output: sheet/front-*
+    steps:
+      - part:
+          steps:
+            - action: dir
+              dir: spec/*.jpg
+            - dup-2
+
+      - template: sheet
+
+  - name: sheet-back
+    input: back2.png
+    output: sheet/back-*
+    steps:
+      - dup-16
+      - template: sheet-back

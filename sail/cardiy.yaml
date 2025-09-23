@@ -1,0 +1,45 @@
+version: 0.1
+name: sail
+template:
+  - name: ""
+    steps: []
+args:
+  width: 56
+  height: 87
+jobs:
+  - name: pirate
+    input: v2/pirate-upscale/pivate.png
+    output: pnp/pirate-*
+    steps:
+      - cut-2-10
+      - limit-10
+      - action: sheet
+        page: a4
+
+  - name: pirate-back
+    input: v2/cap/*.jpg
+    output: pnp/pirate-back-*
+    steps:
+      - action: sheet
+        page: a4
+        handlers: ["flip-x"]
+
+
+  - name: back
+    input: v2/upscale/back.jpg
+    output: pnp/back-*
+    steps:
+      - dup-9
+      - action: sheet
+        page: a4
+        line_color: black
+        line_width: 1
+
+  - name: card
+    input: v2/upscale/card.jpg
+    output: pnp/card-*
+    steps:
+      - cut-3-9
+      - action: sheet
+        page: a4
+        

@@ -1,0 +1,174 @@
+version: 0.1
+name: next-station
+jobs:
+  - input: station.jpg
+    name: station
+    output: station/
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          column: 4
+    
+  - input: stationcards.paris.jpg
+    name: card
+    steps:
+      - action: cut 
+        args:
+          row: 3
+          column: 4
+      - action: save
+        args:
+          output: card/
+  - input: paris-sports.jpg
+    name: dlc-sports
+    output: obj-dlc/
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          column: 4
+      - action: dpi
+        args:
+          dpi: 900
+      
+  - input: bga-upscale/objectives.paris.jpg
+    name: obj
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          column: 5
+      - action: save
+        args:
+          output: obj/
+  - input: bga-upscale/powers.paris.jpg
+    name: power
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          column: 4
+      - action: save
+        args:
+          output: power/
+
+  - input: card-upscale
+    name: sheet-card
+    output: sheet/card-*
+    steps:
+      - action: rotate
+        args:
+          rotate: -90
+      - action: sheet_8 
+        args:
+          back: ../london/back-upscale.png
+          height: 57
+          width: 88
+
+  - input: card-upscale
+    name: sheet-paris-card
+    output: sheet/paris-card-*
+    steps:
+      - action: rotate
+        args:
+          rotate: 90
+      - action: sheet
+        args:
+          row: 3
+          column: 3  
+          width: 57
+          height: 88
+          page: a4
+  - input: paris-back.png
+    name: sheet-paris-card
+    output: sheet/paris-card-back-*
+    steps:
+      - action: rotate
+        args:
+          rotate: 270
+      - action: dup
+        args:
+          dup: 11
+      - action: sheet
+        args:
+          row: 3
+          column: 3  
+          width: 57
+          height: 88
+          page: a4
+          flip: true
+  - input: obj
+    name: sheet-mini
+    output: sheet/mini-*
+    steps:
+      - action: add
+        args:
+          dirs: []
+            # - power
+            # - obj
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          height: 63
+          width: 63
+
+
+  - input: obj-dlc/
+    name: sheet-dlc
+    output: sheet/dlc-*
+    steps:
+      - action: sheet
+        args:
+          row: 0
+          column: 0
+          height: 63
+          width: 63
+  - input: rulebook/back-obj.jpg
+    name: sheet-dlc
+    output: sheet/dlc-back-*
+    steps:
+      - dup-4
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          height: 63
+          width: 63
+          flip: true
+
+  - input: ""
+    name: sheet-mini-back
+    output: sheet/mini-back-*
+    steps:
+      - action: add
+        args:
+          files:
+            # # station
+            # - rulebook/back-station.jpg
+            # - rulebook/back-station.jpg
+            # - rulebook/back-station.jpg
+            # - rulebook/back-station.jpg
+
+            # # power
+            # - rulebook/back-power.jpg
+            # - rulebook/back-power.jpg
+            # - rulebook/back-power.jpg
+            # - rulebook/back-power.jpg
+
+            # obj
+            - rulebook/back-obj.jpg
+            - rulebook/back-obj.jpg
+            - rulebook/back-obj.jpg
+            - rulebook/back-obj.jpg
+            - rulebook/back-obj.jpg
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          height: 63
+          width: 63
+          flip: true
+    
+  

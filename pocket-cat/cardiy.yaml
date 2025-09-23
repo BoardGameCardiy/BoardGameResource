@@ -1,0 +1,45 @@
+version: 0.1
+name: pocket-cats
+jobs:
+  - input: cards.jpg
+    output: cut/power-*
+    name: cut
+    steps:
+      - action: cut
+        args:
+          row: 1
+          column: 8
+  - input: cut/power-08.jpg
+    output: sheet/back-*
+    name: back
+    steps:
+      - action: dup
+        args:
+          dup: 7
+      - action: sheet
+        args:
+          height: 88
+          width: 64
+          column: 3
+          row: 3
+          flip: true
+  - input: bga/power/
+    name: power
+    output: sheet/power-*
+    steps:
+      - action: sheet
+        args:
+          height: 88
+          width: 64
+          column: 3
+          row: 3
+  - input: bga/power/
+    name: color
+    output: sheet/power-*
+    steps:
+      - action: sheet
+        args:
+          height: 88
+          width: 64
+          column: 3
+          row: 3

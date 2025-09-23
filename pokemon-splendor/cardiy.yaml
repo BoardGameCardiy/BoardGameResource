@@ -1,0 +1,99 @@
+version: 0.1
+name: splendor-pokemon
+args:
+  width: 48
+  height: 64
+  row: 0
+  column: 0
+  page: a4-90
+jobs:
+  - input: token/
+    name: token
+    output: sheet/token-*
+    steps:
+      - dup-7
+      - action: sheet 
+        args:
+          width: 26
+          height: 26
+          # page: a4
+          # margin: 4
+
+  - input: 1/
+    name: 1
+    output: sheet/1-*
+    steps:
+      - action: sheet 
+        args: {}
+
+          
+  - input: 2/
+    name: 2
+    output: sheet/2-*
+    steps:
+      - action: sheet 
+        args: {}
+
+          
+  - input: 3/
+    name: 3
+    output: sheet/3-*
+    steps:
+      - action: sheet 
+        args: {}
+
+  - input: 4-2/
+    name: special
+    output: sheet/spec-*
+    steps:
+      - action: add
+        args:
+          dirs:
+             - 5/
+      - action: sheet 
+        args: {}
+          
+  - input: 093.png
+    name: special
+    output: sheet/back-spec-*
+    steps:
+      - action: add
+        args:
+          files:
+             - 099.png
+      - dup-5
+      - action: sheet 
+        args: 
+          flip: true
+          # line_color: black
+
+          
+  - input: 003.png
+    name: back
+    output: sheet/back-3-*
+    steps:
+      - dup-15
+      - action: sheet 
+        args:
+          flip: true
+          # line_color: black
+ 
+  - input: 019.png
+    name: back
+    output: sheet/back-1-*
+    steps:
+      - dup-35
+      - action: sheet 
+        args:
+          flip: true
+          # line_color: black
+  
+  - input: 055.png
+    name: back
+    output: sheet/back-2-*
+    steps:
+      - dup-30
+      - action: sheet 
+        args:
+          flip: true
+          # line_color: black

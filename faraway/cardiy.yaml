@@ -1,0 +1,60 @@
+
+version: 0.1
+name: kot-duel
+args:
+    width : 63
+    height: 88
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          flip: true
+          # align: top
+  
+  - name: sheet-small
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          width : 44
+          height: 68
+
+  - name: sheet-large
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # width : 70
+          # height: 70
+          width : 50
+          height: 50
+
+jobs:
+  - name: sheet-s
+    input: card-upscale/s-*.jpg 
+    output: sheet/card-s-*
+    steps:
+      - template: sheet-small
+
+  - name: sheet-r
+    input: card-upscale/r-*.jpg 
+    output: sheet/card-r-*
+    steps:
+      - template: sheet-large
+
+  - name: cut-s
+    input: card_sanctuary.webp
+    output: card/s-*
+    steps:
+      - cut-6-10
+  
+  - name: cut-r
+    input: card_region.webp
+    output: card/r-*
+    steps:
+      - cut-8-10
+
+  

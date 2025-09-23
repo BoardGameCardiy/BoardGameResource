@@ -1,0 +1,62 @@
+version: 0.1
+name: mandala
+jobs:
+  - input: bga/mandala_cards.png
+    name: cut
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          col: 8
+      - action: min
+      - action: background
+      - action: save
+        args:
+          output: card
+  - input: card
+    name: sheet-front
+    steps: 
+      - action: filter
+        args:
+          id: 1-7
+      - action: dup
+        args:
+          dup: 5
+      - action: sheet
+        args:
+          # back: card/07.png
+          width: 40
+          height: 40
+          dpi: 300
+          column: 5
+          row: 7
+      - action: save
+        args:
+          prefix: mandala-
+          output: sheet/ 
+  - input: card
+    name: sheet-back
+    steps: 
+      - action: filter
+        args:
+          id: 7-7
+      - action: dup
+        args:
+          dup: 33
+      - action: add
+        args:
+          paths:
+            - card/08.png
+            - card/08.png
+      - action: sheet
+        args:
+          # back: card/07.png
+          width: 40
+          height: 40
+          dpi: 300
+          column: 5
+          row: 7
+      - action: save
+        args:
+          prefix: back-
+          output: sheet/ 

@@ -1,0 +1,43 @@
+version: 1.0
+name: VOE
+args:
+  width: 63
+  height: 88
+
+template:
+  - name: sheet-back
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          flip: true
+          align: top
+  
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          page: a4
+          # align: top
+
+jobs:
+  - name: card-en
+    input: card/en-*
+    output: pnp/en-*
+    steps:
+      - template: sheet
+
+  - name: card-hans
+    input: tts-hans/Images/card-zh.jpg
+    output: pnp/hans-*
+    steps:
+      - cut-7-10
+      - template: sheet
+  
+  - name: back
+    input: tts-hans/back.upscale.ps.png
+    output: pnp/back-*
+    steps:
+      - background
+      - dup-9
+      - template: sheet-back

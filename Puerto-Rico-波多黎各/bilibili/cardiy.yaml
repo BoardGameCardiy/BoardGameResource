@@ -1,0 +1,34 @@
+version: 0.1
+name: puerto-rico
+jobs:
+  - input: BV1nZ4y1X7Ge-ps/trans-upscale/master.png.upscale.jpg.png
+    name: better-card
+    output: pnp/better-card-
+    steps:
+      - action: add
+        args:
+          files:
+            - ../trade.png
+     
+      - action: sheet
+        args:
+          width: 63
+          height: 88
+          page: a4
+
+  - input: ./BV1nZ4y1X7Ge-ps/trans-upscale
+    name: card
+    output: pnp/card-
+    steps:
+      - action: add
+        args:
+          files:
+            - BV1nZ4y1X7Ge-ps/trans-upscale/kan.png.upscale.jpg
+            - 
+            - BV1nZ4y1X7Ge-ps/trans-upscale/master.png.upscale.jpg.png
+     
+      - action: sheet
+        args:
+          width: 63
+          height: 88
+          page: a4

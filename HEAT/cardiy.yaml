@@ -1,0 +1,157 @@
+version: 0.1
+name: splendor-pokemon
+#args:
+#  width: 56
+#  height: 87
+jobs:
+  - input: bga/ai.back.jpg
+    output: pnp/ai-back-*
+    name: ai-back
+    steps:
+      - rotate-90
+      - round-4
+      - dup-10
+      - action: expand
+        width: 4
+        height: 8
+      - action: sheet
+        width: 56
+        height: 87
+        flip: true
+        line_color: black
+      - move-1
+        
+  - input: ai-card-clean/
+    output: pnp/ai-*
+    name: ai
+    steps:
+      - action: sheet
+        width: 56
+        height: 87
+        
+  - input: ai/
+    output: ai-card/
+    name: ai-cut
+    steps:
+      - action: cut
+        row: 3
+        column: 3
+    
+  - input: person-upscale/
+    name: person
+    output: pnp/person-*
+    steps:
+      - action: csv 
+        args:
+          csv: pnp-person.csv
+      - width-52
+      - round-4
+      - action: expand
+        args:
+          width: 4
+          height: 6
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          width: 56
+          height: 87
+
+  - input: common-upscale/01.jpg
+    name: presure
+    output: pnp/presure-*
+    steps:
+      - width-52
+      - round-4
+      - action: expand
+        args:
+          width: 4
+          height: 6
+      - dup-9
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          width: 56
+          height: 87
+          
+
+  - input: common-upscale/02.jpg
+    name: heat
+    output: pnp/heat-*
+    steps:
+      - width-52
+      - round-4
+      - action: expand
+        args:
+          width: 4
+          height: 6
+      - dup-9
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          width: 56
+          height: 87
+  
+  
+
+  - input: common-upscale/03.jpg
+    name: back
+    output: pnp/back-*
+    steps:
+      - width-52
+      - round-4
+      - action: expand
+        args:
+          width: 4
+          height: 6
+      - dup-9
+      - action: sheet
+        args:
+          row: 3
+          column: 3
+          width: 56
+          height: 87
+          line_color: black
+      - move-0.6
+
+  - input: bga/common-cards.jpg
+    name: common
+    output: common/
+    steps:
+      - action: cut 
+        args:
+          row: 1
+          column: 3
+  
+  - input: bga/upgrade-cards.png
+    name: cut-upgrade
+    output: upgrade/
+    steps:
+      - action: sheet 
+        args:
+          row: 6
+          column: 10
+          limit: 54
+
+  - input: upgrade-upscale
+    name: upgrade
+    output: pnp/upgrade-*
+    steps:
+      - round
+      - action: expand
+        width: 4
+        height: 8
+      - action: sheet 
+
+    
+  - input: bga/personal-cards.jpg
+    name: self
+    output:  self/
+    steps:
+      - action: cut 
+        args:
+          row: 7
+          column: 7
+          

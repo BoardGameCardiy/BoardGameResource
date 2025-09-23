@@ -1,0 +1,219 @@
+version: 0.1
+name: king
+args:
+  width: 43
+  height: 67
+#  width: 40
+#  height: 62
+template:
+  - name: front
+    steps:
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+
+  
+  - name: back
+    steps:
+      - rotate-180
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+
+jobs:
+  - name: score
+    output: pnp/score-1-*
+    steps:
+      - action: add
+        files:
+          - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/board-upscale/26.jpg.png
+      - template: front
+      - dup-18
+      - action: sheet
+        page: a4-90
+        
+  - name: score
+    output: pnp/score-2-*
+    steps:
+      - action: add
+        files:
+          - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/board-upscale/27.jpg.png
+      - template: back
+      - dup-18
+      - action: sheet
+        page: a4-90
+        flip_y: true
+        line_width: 0
+        
+  - name: fix
+    output: pnp/fix-*
+    steps:
+      - action: add
+        files:
+          # - ""
+          # - ""
+          # - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/2.png
+          # - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/4.png
+          - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/board-upscale/25.jpg.png
+          - /Users/yz/Project/feng-project/cardiy/wip/burgundy-card/cut/board-upscale/29.jpg.png
+      - dup-3
+      - template: front
+      - action: sheet
+        page: a4-90
+        # flip_y: true
+        line_width: 1
+  
+  - name: animal-back
+    input: back-green-fix.png
+    output: pnp/animal-back-*
+    steps:
+      - template: front
+      - dup-18
+      - action: sheet
+        page: a4-90
+  
+  - name: animal
+    input: cut/animal-2-upscale
+    output: pnp/animal-*
+    steps:
+      - correct_inner
+      - resize-422-654
+      - round-4
+      - action: expand
+        width: 4
+        height: 0
+      - dup-5
+      - action: sheet
+        page: a4-90
+        line_width: 0
+  
+  - name: board
+    output: pnp/board-back-*
+    steps:
+      - action: add
+        dirs:
+          - cut/base-upscale/bonus
+          - cut/base-upscale/dice
+          - cut/base-upscale/stage
+      - rotate-180
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+      - action: sheet
+        page: a4-90
+        #        line_color: black
+        flip_y: true
+  
+  - input: cut/base-x4-upscale
+    name: base
+    output: pnp/base-back-*
+    steps:
+      - rotate-90
+      - dup-4
+      - action: add
+        files:
+          - cut/board-upscale/stage/23.jpg.png
+          - cut/board-upscale/stage/24.jpg.png
+          - cut/board-upscale/15.jpg.png
+          - cut/board-upscale/16.jpg.png
+          - cut/board-upscale/28.jpg.png
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+      - action: sheet
+        page: a4-90
+        flip_y: true
+        line_width: 0
+  
+  - name: good
+    output: pnp/good-*
+    steps:
+      - action: add
+        files:
+          - cut/board-upscale/17.jpg.png
+          - cut/board-upscale/18.jpg.png
+          - cut/board-upscale/19.jpg.png
+      #      - rotate-180
+      - dup-6
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+      - action: sheet
+        page: a4-90
+        #        flip_y: true
+        line_width: 0
+  
+  - input: cut/board-upscale/15.jpg.png
+    name: first
+    output: pnp/first-back
+    steps:
+      - rotate-180
+      - dup-4
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+      - action: sheet
+        page: a4-90
+        flip_y: true
+        line_width: 0
+  
+  - input: cut/building-upscale/x1
+    name: building
+    output: pnp/build-*
+    steps:
+      - action: add
+        dirs:
+          - cut/building-upscale/x2
+          - cut/building-upscale/x3
+      - action: csv
+        csv: building.csv
+      - correct_inner
+      - resize-422-654
+      - action: expand
+        width: 4
+        height: 0
+      - action: sheet
+        page: a4-90
+        line_width: 0
+  
+  - input: back-5.png
+    name: red
+    output: pnp/red
+    steps:
+      - correct_inner
+      - resize-420-620
+      - action: expand
+        width: 10
+        height: 0
+      - dup-18
+      - action: sheet
+        page: a4-90
+        line_width: 1
+  
+  
+  - input: back-brown-fix.png
+    name: brown
+    output: pnp/brown
+    steps:
+      - correct_inner
+      - resize-420-620
+      - action: expand
+        width: 10
+        height: 0
+      - dup-18
+      - action: sheet
+        page: a4-90
+        line_width: 1
+        

@@ -1,0 +1,101 @@
+version: "0.1"
+name: sample
+template:
+  - name: sheet
+    steps:
+      - action: sheet
+        args:
+          width: 56
+          height: 87
+          page: a4-90
+          flip: true
+
+  - name: front
+    steps:
+      - action: sheet
+        args:
+          width: 56
+          height: 87
+          page: a4-90
+          line_color: white
+jobs:
+  - name: fix
+    output: pnp/fix-
+    steps:
+      - action: add
+        args:
+          files:
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/card/min/1-40.png
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/card/min/1-13.png
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/card/min/1-06.png
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/card/min/1-21.png
+      - action: expand
+        args:
+          width: 6
+          height: 6
+      - template: front
+
+  - name: token
+    output: pnp/token-
+    steps:
+      - action: add
+        args:
+          files:
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/006.ps.png
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/007.ps.png
+
+      - background
+
+      - dup-6
+      - action : add
+        args:
+          files:
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/012.png
+      - background
+      - action: sheet
+        args:
+          width: 22
+          height: 20
+          row: 2
+          column: 4
+          line_color: white
+          margin: 10
+
+  - name: back
+    input: 004.origin.png
+    output: pnp/back-10-
+    steps:
+      - dup-10
+      - template: sheet
+
+  - name: back-5
+    input: 004.origin.png
+    output: pnp/back-5-
+    steps:
+      - dup-5
+      - template: sheet
+   
+
+  - name: sheet
+    input: card/min
+    output: pnp/card-*
+    steps:
+      - action: expand
+        args:
+          width: 8
+          height: 8
+      - template: front
+
+
+  - name: cut
+    output: card/1-*
+    steps:
+      - action: add
+        args:
+          files:
+            - /Users/yz/Project/feng-project/cardiy/wip/SCOUT/003.jpg
+      - action: cut 
+        args:
+          row: 6
+          column: 8
+          limit : 45

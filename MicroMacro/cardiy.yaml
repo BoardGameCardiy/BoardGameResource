@@ -1,0 +1,34 @@
+version: 0.1
+name: micor_macro
+template:
+  - name: ""
+    steps: []
+jobs:
+  - name: card
+    input: card/A*.jpg
+    output: pnp/card-*
+    steps:
+      - cut-6-5
+      # - action: background
+      - rotate
+      - action: sheet
+        width: 88
+        height: 57
+        page: a4
+        line_color: black
+        line_width: 1
+        flip: true
+
+  - name: back
+    input: card/B*.jpg
+    output: pnp/back-*
+    steps:
+      - cut-5-6
+      # - action: background
+      - action: sheet
+        width: 40
+        height: 53.5
+        page: a4-90
+        line_color: black
+        handlers: ["flip-y"]
+

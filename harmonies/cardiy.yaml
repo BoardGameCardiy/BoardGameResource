@@ -1,0 +1,102 @@
+version: "0.1"
+name: harmonies-森林和弦
+template:
+  - name: sheet
+    steps:
+      - action: layout_sheet
+        args:
+          flip: true
+          layout:
+            - [70, 120, 2]
+            - [120, 70, 4, 270]
+
+  - name: front
+    steps:
+      - action: layout_sheet
+        args:
+         layout:
+            - [70, 120, 2]
+            - [120, 70, 4, 90]
+        
+
+jobs:
+  - name: cut-1
+    input: 24.jpg
+    output: card/white-*
+    steps:
+      - action: cut
+        column: 6
+        row: 2
+        limit: 11
+
+  - name: cut-2
+    input: 27.jpg
+    output: card/black-*
+    steps:
+      - action: cut
+        column: 8
+        row: 4
+
+  - name: front-1
+    output: pnp/black-
+    steps:
+      - template: front
+      
+  - name: front-2
+    output: pnp/white-
+    steps:
+      - action: file
+        file: card/black-31.png
+      - action: file
+        file: card/black-32.png
+      - action: dirs
+        dirs:
+          - card/white*
+      - template: front
+
+  - name: back-1
+    input: 28.jpg
+    output: pnp/back-5-
+    steps:
+      - dup-6
+      - template: sheet
+  
+  - name: back-2
+    input: 25.jpg
+    output: pnp/back-white-
+    steps:
+      - dup-6
+      - template: sheet
+      
+  - name: back-3
+    output: pnp/back-mix-
+    steps:
+      - action: file
+        file: 28.jpg
+        dup: 2
+      - action: file
+        file: 25.jpg
+        dup: 4
+      - template: sheet
+
+  - name: help
+    output: pnp/help-mix-
+    steps:
+      - action: file
+        file: helpSideA.ps.png
+        dup: 4
+      - action: file
+        file: card/white-10.png
+      - template: front
+
+  - name: help
+    output: pnp/help-back-mix-
+    steps:
+      - action: file
+        file: helpSideB.ps.png
+        dup: 4
+      - action: file
+        file: 25.jpg
+      - template: sheet
+
+

@@ -1,0 +1,79 @@
+version: 0.1
+name: sample
+args:
+    width : 64
+    height: 88
+jobs:
+  - name: role
+    output: pnp/role-back
+    steps:
+      - action: file
+        files: []
+
+  - input: trans/back.png.upscale.jpg
+    output: pnp/role-back
+    name: role
+    steps:
+      - dup-2
+      - action: sheet
+        flip: true
+      - move-0.5
+
+  - name: role
+    output: pnp/role
+    steps:
+      - action: file
+        files: [8.png.upscale.jpg, 9.png.upscale.jpg]
+      - action: sheet
+        
+
+  - input: 18.png
+    name: cut-card
+    output: card/*
+    steps:
+      - action: cut 
+        row: 3
+        column: 10
+        limit : 28
+  - input: card
+    output: pnp/card-*
+    name: front
+    steps:
+      - action : sheet
+
+  - input: trans/back.png.upscale.jpg
+    output: pnp/back-*
+    name: back
+    steps:
+      - dup-28
+      - action: sheet
+        flip: true
+      - move-0.9
+
+  - input: pdf-token-upscale/
+    output: pnp/token-*
+    name: token
+    steps:
+      - background
+      - action: sheet
+        width: 28
+        height: 28
+      
+
+  - input: story-1.png
+    output: story/1-*
+    name: story
+    steps:  
+      - action: cut
+        row: 2
+        column: 10
+        limit: 12
+  - input: story-2.png
+    output: story/2-*
+    name: story
+    steps:  
+      - action: cut
+        row: 2
+        column: 10
+        limit: 12
+     
