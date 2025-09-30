@@ -45,7 +45,7 @@ style: |
 | **Setup for 2-player Game** | **2人游戏设置** |
 | 147 | 147 |
 
-![](2player.png)
+![](2-player-board.png)
 
 ---
 
