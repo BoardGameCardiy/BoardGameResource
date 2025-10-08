@@ -59,10 +59,6 @@ style: |
 | The player dealt the **1 of Rings** will **control the pyramid**, including picking a character for it during **setup** and playing cards from the **pyramid hand** during tricks. | 拿到**魔戒1号牌**的玩家将**控制金字塔**，包括在**设置阶段**为其选择一个角色，并在打牌时从**金字塔手牌**中出牌。 |
 | If the pyramid is dealt the **1 of Rings** (neither of the players has the **1 of Rings**), then the pyramid is **Frodo**, and the player to the right of it will **control it**. | 如果金字塔拿到了**魔戒1号牌**（两名玩家都没有魔戒1号牌），那么金字塔就是**弗罗多**，金字塔右侧的玩家将**控制它**。 |
 
----
-
-### Setup for 2-player Game (2人游戏设置)
-
 ![](2-player-board.png)
 
 ---
